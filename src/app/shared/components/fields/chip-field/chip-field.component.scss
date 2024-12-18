@@ -1,0 +1,12 @@
+:host ::ng-deep {
+  .custom-icon .p-button-icon {
+    font-size: 14px;
+  }
+  .p-icon {
+    color: #ef4444;
+  }
+
+  .p-chip .pi-chip-remove-icon {
+    margin-inline-start: 0rem;
+  }
+}

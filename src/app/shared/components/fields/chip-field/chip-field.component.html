@@ -1,0 +1,33 @@
+@if (props.chips()?.length) {
+  <h2
+    class="flex align-items-center gap-2 mb-3 capitalize text-black text-base font-semibold"
+  >
+    <i [class]="props.icon + ' ' + props.iconClass"></i>
+    {{ props.title }}
+  </h2>
+  <div class="flex flex-wrap gap-3 mb-5">
+    @for (chip of props.chips(); track $index) {
+      <p-chip styleClass="text-900 gap-2">
+        <span class="capitalize text-xs"> {{ chip[props.accessTitle] }}</span>
+        <button
+          pButton
+          type="button"
+          class="p-0 h-auto w-auto border-noround text-red-500 custom-icon"
+          icon="pi pi-times"
+          [rounded]="true"
+          [text]="true"
+          (click)="props.onRemove && props.onRemove(chip.id, field)"
+        ></button>
+        <button
+          pButton
+          type="button"
+          class="p-0 h-auto w-auto border-noround text-blue-500 custom-icon"
+          icon="fa-solid fa-pen"
+          [rounded]="true"
+          [text]="true"
+          (click)="props.onUpdate && props.onUpdate(chip, field)"
+        ></button>
+      </p-chip>
+    }
+  </div>
+}

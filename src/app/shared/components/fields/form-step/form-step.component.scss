@@ -1,0 +1,22 @@
+:host ::ng-deep {
+  .p-steps {
+    &::-webkit-scrollbar {
+      width: 15px;
+    }
+
+    &::-webkit-scrollbar-track {
+      border-radius: 0;
+      background-color: transparent;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #e1e0e0;
+      border-radius: 8px;
+      border: solid 5px #fff;
+    }
+
+    &:hover::-webkit-scrollbar-thumb {
+      background-color: #c2c2c2;
+    }
+  }
+}
