@@ -1,6 +1,5 @@
 import { ComponentType } from '@angular/cdk/portal';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { marker as _ } from '@biesbjerg/ngx-translate-extract-marker';
 import { TranslateModule } from '@ngx-translate/core';
 import {
@@ -8,41 +7,34 @@ import {
   LangService,
   TableWrapperComponent,
 } from '@shared';
-import { ButtonModule } from 'primeng/button';
-import { TooltipModule } from 'primeng/tooltip';
-import { ProductDialogComponent } from './products-dialog.component';
-import { Product } from './services/service-type';
+import { CostDialogComponent } from './cost-dialog.component';
+import { Cost } from './services/service-type';
 
 @Component({
-  selector: 'app-products',
+  selector: 'app-costs',
   standalone: true,
-  imports: [
-    TranslateModule,
-    TableWrapperComponent,
-    TooltipModule,
-    RouterLink,
-    ButtonModule,
-  ],
-  templateUrl: './products.component.html',
+  imports: [TranslateModule, TableWrapperComponent],
+  templateUrl:
+    '/src/app/shared/components/basic-crud/base-index.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export default class ProductComponent extends BaseIndexComponent<
-  Product,
-  ComponentType<ProductDialogComponent>
+export default class CostsComponent extends BaseIndexComponent<
+  Cost,
+  ComponentType<CostDialogComponent>
 > {
   currentLang = inject(LangService).currentLanguage;
   ngOnInit() {
-    this.dialogComponent = ProductDialogComponent;
+    this.dialogComponent = CostDialogComponent;
     this.indexMeta = {
       ...this.indexMeta,
       endpoints: {
-        index: 'product/index',
-        delete: 'product/delete',
+        index: 'cost/index',
+        delete: 'cost/delete',
       },
-      indexTitle: this.translate.instant(_('products')),
-      createBtnLabel: this.translate.instant(_('Create product')),
+      indexTitle: this.translate.instant(_('Costs')),
+      createBtnLabel: this.translate.instant(_('Create costs')),
       indexIcon: 'fa-brands fa-product-hunt',
-      indexTableKey: 'PRODUCT_KEY',
+      indexTableKey: 'COSTS_KEY',
       columns: [
         {
           name: 'id',

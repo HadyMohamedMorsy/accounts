@@ -1,0 +1,54 @@
+<app-table-wrapper
+  [headerTitle]="indexMeta.indexTitle"
+  [titleIcon]="indexMeta.indexIcon"
+  [headerBtnLabel]="indexMeta.createBtnLabel"
+  [displayCreateButton]="indexMeta.displayCreateButton"
+  [columns]="indexMeta.columns"
+  [dataSource]="records()"
+  [loading]="isLoading()"
+  [totalRecords]="totalRecords()"
+  [recordsFiltered]="recordsFiltered()"
+  paginatorPosition="both"
+  [stateKey]="indexMeta.indexTableKey"
+  [rows]="rows()"
+  [indexRole]="roles().index"
+  [updateBtnRole]="roles().update"
+  [createBtnRole]="roles().create"
+  [deleteBtnRole]="roles().delete"
+  [withActionsColumn]="indexMeta.withAction"
+  [displayUpdateButton]="indexMeta.displayUpdateButton"
+  [displayDeleteButton]="indexMeta.displayDeleteButton"
+  [globalFilterValue]="globalFilterValue"
+  [reorderableColumns]="indexMeta.reorderableColumns ?? false"
+  [reorderableRows]="indexMeta.reorderableRows ?? false"
+  (createBtnClicked)="openCreateRecordDialog()"
+  (updateBtnClicked)="openUpdateRecordDialog($event)"
+  (deleteBtnClicked)="deleteRecord($event)"
+  (onLoadData)="loadRecords($event)"
+>
+  <div moreActions>
+    <ul class="list-none m-0 p-0 flex flex-wrap gap-3 align-items-center">
+      <li>
+        <a
+          pButton
+          class="text-sm px-3 py-2 p-button text-white"
+          [label]="'Orders' | translate"
+          icon="pi pi-calendar-plus"
+          routerLink="/orders"
+        >
+        </a>
+      </li>
+    </ul>
+
+    <ng-template #extendDefaultActionsTemplate let-project>
+      <button
+        pButton
+        pRipple
+        pTooltip="Add Cart Item"
+        [icon]="'pi pi-cart-plus text-xs'"
+        tooltipPosition="top"
+        class="p-button-rounded p-button-text p-button-sm"
+      ></button>
+    </ng-template>
+  </div>
+</app-table-wrapper>

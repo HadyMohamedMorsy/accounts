@@ -11,10 +11,10 @@ import {
   SpinnerComponent,
 } from '@shared';
 import { ButtonModule } from 'primeng/button';
-import { ProductModel } from './services/service-type';
+import { CostModel } from './services/service-type';
 
 @Component({
-  selector: 'app-product-dialog',
+  selector: 'app-cost-dialog',
   standalone: true,
   templateUrl:
     '/src/app/shared/components/basic-crud/base-create-update/base-create-update.component.html',
@@ -28,32 +28,32 @@ import { ProductModel } from './services/service-type';
   ],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class ProductDialogComponent extends BaseCreateUpdateComponent<ProductModel> {
+export class CostDialogComponent extends BaseCreateUpdateComponent<CostModel> {
   #fieldBuilder = inject(FieldBuilderService);
 
   ngOnInit() {
     this.dialogMeta = {
       ...this.dialogMeta,
       endpoints: {
-        store: 'product/index',
-        update: 'product/update',
+        store: 'cost/index',
+        update: 'cost/update',
       },
     };
 
     if (this.editData) {
       this.dialogMeta = {
         ...this.dialogMeta,
-        dialogTitle: this.translate.instant(_('Update product')),
-        submitButtonLabel: this.translate.instant(_('Update product')),
+        dialogTitle: this.translate.instant(_('Update cost')),
+        submitButtonLabel: this.translate.instant(_('Update cost')),
       };
-      this.model = new ProductModel(this.editData);
+      this.model = new CostModel(this.editData);
     } else {
       this.dialogMeta = {
         ...this.dialogMeta,
-        dialogTitle: this.translate.instant(_('Create product')),
-        submitButtonLabel: this.translate.instant(_('Create product')),
+        dialogTitle: this.translate.instant(_('Create cost')),
+        submitButtonLabel: this.translate.instant(_('Create cost')),
       };
-      this.model = new ProductModel();
+      this.model = new CostModel();
     }
     this.#updateFields();
   }
@@ -66,53 +66,42 @@ export class ProductDialogComponent extends BaseCreateUpdateComponent<ProductMod
     return [
       this.#fieldBuilder.fieldBuilder([
         {
-          key: `code`,
+          key: `transportation`,
           type: 'floated-input-field',
           props: {
-            label: _(`code`),
+            label: _(`transportation`),
             required: true,
-            placeholder: _(`code`),
+            placeholder: _(`transportation`),
           },
         },
         {
-          key: `name`,
+          key: `packaging`,
           type: 'floated-input-field',
           props: {
-            label: _(`name`),
+            label: _(`packaging`),
             required: true,
-            placeholder: _(`name`),
+            placeholder: _(`packaging`),
           },
         },
         {
-          key: `selling_price`,
+          key: `advertising_markting`,
           type: 'floated-input-field',
           props: {
-            label: _(`selling price`),
+            label: _(`advertising markting price`),
             required: true,
-            placeholder: _(`selling price`),
+            placeholder: _(`advertising markting price`),
           },
         },
       ]),
       this.#fieldBuilder.fieldBuilder([
         {
-          key: `purchase_price`,
+          key: `damaged`,
           type: 'floated-input-field',
           className: 'col-12 md:col-4',
           props: {
-            label: _(`purchase price`),
+            label: _(`damaged`),
             required: true,
-            placeholder: _(`purchase price`),
-          },
-        },
-        {
-          key: `store`,
-          type: 'floated-input-field',
-          className: 'col-12 md:col-4',
-          props: {
-            type: 'number',
-            label: _(`store`),
-            required: true,
-            placeholder: _(`store`),
+            placeholder: _(`damaged`),
           },
         },
       ]),

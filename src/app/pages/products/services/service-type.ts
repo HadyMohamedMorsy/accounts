@@ -8,15 +8,17 @@ export interface Product {
 export class ProductModel {
   id: number | null;
   name: string | null;
-  price: number | null;
-  cost: number | null;
-  sku: string | null;
+  code: string | null;
+  selling_price: number | null;
+  purchase_price: number | null;
+  store: number | null;
 
   constructor(editData?: ProductModel) {
     this.id = editData?.id || null;
     this.name = editData?.name || null;
-    this.price = editData?.price || null;
-    this.cost = editData?.cost || null;
-    this.sku = editData?.sku || null;
+    this.code = editData?.code || null;
+    this.purchase_price = editData?.purchase_price || null;
+    this.selling_price = editData?.selling_price || null;
+    this.store = editData?.store || null;
   }
 }
