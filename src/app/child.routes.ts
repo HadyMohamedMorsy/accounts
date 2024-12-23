@@ -1,13 +1,11 @@
 import { Route } from '@angular/router';
-import { settingsRoutes } from '@pages/settings/all-settings/settings.routes';
-import { currencyRoutes } from '@pages/settings/currencies/currency.routes';
-import { facilitydistanceRoutes } from '@pages/settings/facility-distance/facility-distance.routes';
-import { faqsRoutes } from '@pages/settings/faqs/faqs.routes';
-import { usersRoutes } from '@pages/settings/users/users.routes';
+import { costRoutes } from '@pages/costs/cost.routes';
+import { orderRoutes } from '@pages/orders/order.routes';
+import { productRoutes } from '@pages/products/products.routes';
+import { returnsRoutes } from '@pages/returns/returns.routes';
 export default [
-  ...currencyRoutes,
-  ...usersRoutes,
-  ...settingsRoutes,
-  ...faqsRoutes,
-  ...facilitydistanceRoutes,
+  ...returnsRoutes,
+  ...productRoutes,
+  ...costRoutes,
+  ...orderRoutes,
 ] as Route[];

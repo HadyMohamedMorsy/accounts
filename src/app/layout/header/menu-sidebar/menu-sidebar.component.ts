@@ -47,81 +47,21 @@ export class MenuSidebarComponent {
   #breakpoint = inject(BreakpointService);
   currentLang = inject(LangService).currentLanguage;
 
-  domain = environment.DOMAIN_URL_FRONT;
+  // domain = environment.DOMAIN_URL_FRONT;
 
   menuItems = computed(() => [
-    {
-      title: 'Dashboard',
-      icon: 'fas fa-home',
-      tooltip: 'Dashboard',
-      link: '/dashboard',
-    },
-    {
-      title: 'projects',
-      icon: 'fas fa-city',
-      tooltip: 'Projects',
-      link: '/inventory/projects',
-      hidden: this.isLgScreen(),
-    },
-    {
-      title: 'units',
-      icon: 'fa-solid fa-building-un',
-      tooltip: 'units',
-      link: '/inventory/units',
-      hidden: this.isLgScreen(),
-    },
-    {
-      title: 'blogs',
-      icon: 'fa-solid fa-newspaper',
-      tooltip: 'Blogs',
-      link: '/blogs',
-      hidden: this.isLgScreen(),
-    },
-    {
-      title: 'Careers',
-      icon: 'fa-solid fa-user-tie',
-      tooltip: 'Careers',
-      link: 'careers',
-      hidden: this.isLgScreen(),
-    },
-    {
-      title: 'Events',
-      icon: 'fa-solid fa-calendar-days',
-      tooltip: 'Events',
-      link: 'events',
-      hidden: this.isLgScreen(),
-    },
-    {
-      title: 'Contacts',
-      icon: 'fa-solid fa-envelopes-bulk',
-      tooltip: 'Contacts',
-      link: '/contacts',
-    },
-    {
-      title: 'testimonials',
-      icon: 'fa-solid fa-comment',
-      tooltip: 'Testimonials',
-      link: '/testimonial',
-    },
-    {
-      title: 'organization',
-      icon: 'fa-solid fa-sitemap',
-      tooltip: 'Organization',
-      link: '/organization',
-    },
-    {
-      title: 'packages',
-      icon: 'fa-solid fa-box',
-      tooltip: 'Packages',
-      link: '/packages',
-    },
-    {
-      title: 'settings',
-      icon: 'fa-solid fa-gear',
-      tooltip: 'Settings',
-      styleClass: 'mt-auto',
-      link: '/settings',
-    },
+    // {
+    //   title: 'projects',
+    //   icon: 'fas fa-city',
+    //   tooltip: 'Projects',
+    //   link: '/projects',
+    // },
+    // {
+    //   title: 'units',
+    //   icon: 'fa-solid fa-building-un',
+    //   tooltip: 'units',
+    //   link: '/inventory/units',
+    // },
   ]);
 
   isSmScreen = this.#breakpoint.isSmScreen;

@@ -4,7 +4,6 @@
 
 export const environment = {
   production: false,
-  API_URL: 'https://mnhna.8worx.dev/api/api/v1',
+  API_URL: 'http://localhost:3000/api/v1',
   DOMAIN_URL: 'http://localhost:4200/',
-  DOMAIN_URL_FRONT: 'http://localhost:4200',
 };

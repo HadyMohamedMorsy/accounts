@@ -11,7 +11,6 @@ import { FormGroup } from '@angular/forms';
 import { RouterLink } from '@angular/router';
 import { FormlyFieldConfig, FormlyFormOptions } from '@ngx-formly/core';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
-import { serialize } from 'object-to-formdata';
 import { ButtonModule } from 'primeng/button';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { Observable, finalize } from 'rxjs';
@@ -65,21 +64,22 @@ export abstract class BaseCreateUpdateComponent<
   }
 
   protected createUpdateRecord(endpoints: { [key: string]: string }) {
-    const model =
-      this.editData && this.editData.method !== 'create'
-        ? { ...this.updateModel(), _method: 'PUT' }
-        : { ...this.updateModel(), _method: 'POST' };
-    
-    this.formData = serialize<T>(model, {
-      indices: true,
-      allowEmptyArrays: true,
-      nullsAsUndefineds: true,
+    // this.formData = serialize<T>(this.updateModel(), {
+    //   indices: true,
+    //   allowEmptyArrays: true,
+    //   nullsAsUndefineds: true,
+    // });
+
+    Object.keys(this.updateModel()).forEach((key) => {
+      if (this.updateModel()[key] === null) {
+        delete this.updateModel()[key];
+      }
     });
 
     const action =
       this.editData && this.editData.method !== 'create'
-        ? this.api.request('post', endpoints.update, this.formData)
-        : this.api.request('post', endpoints.store, this.formData);
+        ? this.api.request('post', endpoints.update, this.updateModel())
+        : this.api.request('post', endpoints.store, this.updateModel());
 
     this.manageRecord(action);
   }

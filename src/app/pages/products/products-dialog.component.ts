@@ -35,7 +35,7 @@ export class ProductDialogComponent extends BaseCreateUpdateComponent<ProductMod
     this.dialogMeta = {
       ...this.dialogMeta,
       endpoints: {
-        store: 'product/index',
+        store: 'product/store',
         update: 'product/update',
       },
     };
@@ -78,22 +78,11 @@ export class ProductDialogComponent extends BaseCreateUpdateComponent<ProductMod
           key: `name`,
           type: 'floated-input-field',
           props: {
-            label: _(`name`),
+            label: _(`Name`),
             required: true,
-            placeholder: _(`name`),
+            placeholder: _(`Name`),
           },
         },
-        {
-          key: `selling_price`,
-          type: 'floated-input-field',
-          props: {
-            label: _(`selling price`),
-            required: true,
-            placeholder: _(`selling price`),
-          },
-        },
-      ]),
-      this.#fieldBuilder.fieldBuilder([
         {
           key: `purchase_price`,
           type: 'floated-input-field',
@@ -104,15 +93,30 @@ export class ProductDialogComponent extends BaseCreateUpdateComponent<ProductMod
             placeholder: _(`purchase price`),
           },
         },
+      ]),
+      this.#fieldBuilder.fieldBuilder([
+        {
+          key: `selling_price`,
+          type: 'floated-input-field',
+          props: {
+            label: _(`selling price`),
+            required: true,
+            placeholder: _(`selling price`),
+          },
+          expressions: {
+            'props.min': 'model.purchase_price',
+          },
+        },
         {
           key: `store`,
           type: 'floated-input-field',
           className: 'col-12 md:col-4',
           props: {
             type: 'number',
-            label: _(`store`),
+            label: _(`Store`),
             required: true,
-            placeholder: _(`store`),
+            min: 0,
+            placeholder: _(`Store`),
           },
         },
       ]),

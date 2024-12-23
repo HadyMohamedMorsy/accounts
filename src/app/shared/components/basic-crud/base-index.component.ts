@@ -79,16 +79,9 @@ export abstract class BaseIndexComponent<
     switchMap((filters) =>
       this.api.request('post', this.indexMeta.endpoints.index, filters).pipe(
         map(({ data }) => data),
-        map((data) => {
-          return {
-            data: data.data.map((record: any) => record.record),
-            recordsTotal: data.recordsTotal,
-            recordsFiltered: data.recordsFiltered,
-          };
-        }),
         tap((data) => {
           this.records.set(data.data);
-          this.totalRecords.set(data.recordsTotal);
+          this.totalRecords.set(data.totalRecords);
           this.recordsFiltered.set(data.recordsFiltered);
           this.isLoading.set(false);
         }),
@@ -119,8 +112,8 @@ export abstract class BaseIndexComponent<
       return {
         ...oldFilters,
         ...setFiltersOnInit,
-        length: event.rows || this.rows(),
-        start: event.first || 0,
+        length: event.rows ?? this.rows(),
+        start: event.first ?? 1,
         search: { value: this.globalFilterValue, regex: false },
         columns: this.indexMeta.columns.map(
           ({ render, trans, transform, ...col }) => col,
@@ -131,7 +124,6 @@ export abstract class BaseIndexComponent<
             dir: sortOrder === 1 ? 'asc' : 'desc',
           },
         ],
-        _method: 'GET',
       };
     });
   }

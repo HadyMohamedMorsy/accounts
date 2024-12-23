@@ -35,7 +35,7 @@ export class CostDialogComponent extends BaseCreateUpdateComponent<CostModel> {
     this.dialogMeta = {
       ...this.dialogMeta,
       endpoints: {
-        store: 'cost/index',
+        store: 'cost/store',
         update: 'cost/update',
       },
     };
@@ -70,7 +70,6 @@ export class CostDialogComponent extends BaseCreateUpdateComponent<CostModel> {
           type: 'floated-input-field',
           props: {
             label: _(`transportation`),
-            required: true,
             placeholder: _(`transportation`),
           },
         },
@@ -79,7 +78,6 @@ export class CostDialogComponent extends BaseCreateUpdateComponent<CostModel> {
           type: 'floated-input-field',
           props: {
             label: _(`packaging`),
-            required: true,
             placeholder: _(`packaging`),
           },
         },
@@ -88,7 +86,6 @@ export class CostDialogComponent extends BaseCreateUpdateComponent<CostModel> {
           type: 'floated-input-field',
           props: {
             label: _(`advertising markting price`),
-            required: true,
             placeholder: _(`advertising markting price`),
           },
         },
@@ -100,8 +97,16 @@ export class CostDialogComponent extends BaseCreateUpdateComponent<CostModel> {
           className: 'col-12 md:col-4',
           props: {
             label: _(`damaged`),
-            required: true,
             placeholder: _(`damaged`),
+          },
+        },
+        {
+          key: `salaries`,
+          type: 'floated-input-field',
+          className: 'col-12 md:col-4',
+          props: {
+            label: _(`salaries`),
+            placeholder: _(`salaries`),
           },
         },
       ]),

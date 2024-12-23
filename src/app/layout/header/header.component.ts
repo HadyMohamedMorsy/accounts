@@ -9,7 +9,6 @@ import {
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { Router } from '@angular/router';
 import { marker as _ } from '@biesbjerg/ngx-translate-extract-marker';
-import { environment } from '@env';
 import { TranslateModule, TranslateService } from '@ngx-translate/core';
 import {
   AuthService,
@@ -59,7 +58,6 @@ export class HeaderComponent {
   #translate = inject(TranslateService);
   #breakpoint = inject(BreakpointService);
   #confirmService = inject(ConfirmService);
-  domain = environment.DOMAIN_URL_FRONT;
 
   closeSidebar = signal(false);
   showBtnDisplayMenuSidebar = signal(false);
@@ -87,39 +85,27 @@ export class HeaderComponent {
   ngOnInit() {
     this.headerLinks = [
       {
-        label: this.#translate.instant(_('Projects')),
-        icon: 'fas fa-city',
-        routerLink: '/inventory/projects',
+        label: this.#translate.instant(_('Products')),
+        icon: 'fa-brands fa-product-hunt',
+        routerLink: '/product',
         routerLinkActiveOptions: { exact: true },
       },
       {
-        label: this.#translate.instant(_('Units')),
+        label: this.#translate.instant(_('Orders')),
         icon: 'fa-solid fa-building-un',
-        routerLink: '/inventory/units',
+        routerLink: '/order',
         routerLinkActiveOptions: { exact: true },
       },
       {
-        label: this.#translate.instant(_('Blogs')),
-        icon: 'fa-solid fa-newspaper',
-        routerLink: 'blogs',
+        label: this.#translate.instant(_('Costs')),
+        icon: 'fa-solid fa-money-bill',
+        routerLink: '/cost',
         routerLinkActiveOptions: { exact: true },
       },
       {
-        label: this.#translate.instant(_('Developers')),
-        icon: 'fa-solid fa-building',
-        routerLink: 'developers',
-        routerLinkActiveOptions: { exact: true },
-      },
-      {
-        label: this.#translate.instant(_('Careers')),
-        icon: 'fa-solid fa-user-tie',
-        routerLink: 'careers',
-        routerLinkActiveOptions: { exact: true },
-      },
-      {
-        label: this.#translate.instant(_('Events')),
-        icon: 'fa-solid fa-calendar-days',
-        routerLink: 'events',
+        label: this.#translate.instant(_('Returns')),
+        icon: 'fa-solid fa-rotate-left',
+        routerLink: '/returns',
         routerLinkActiveOptions: { exact: true },
       },
     ];
