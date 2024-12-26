@@ -1,0 +1,139 @@
+<div
+  class="flex justify-content-between align-items-center border-bottom-1 border-300 p-3"
+>
+  <h2 class="text-xl font-medium">{{ "Create Order" }}</h2>
+  <button
+    pButton
+    icon="pi pi-times"
+    class="p-button-text p-button-plain p-button-rounded shadow-none"
+  ></button>
+</div>
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()" class="px-3 pt-4">
+  <div class="grid mb-2">
+    <div class="md:col-4 col-12">
+      <input
+        pInputText
+        autocomplete="off"
+        formControlName="email"
+        type="email"
+        class="field"
+        placeholder="{{ 'Email' | translate }}"
+      />
+    </div>
+    <div class="md:col-4 col-12">
+      <input
+        pInputText
+        autocomplete="off"
+        formControlName="firstName"
+        class="field"
+        placeholder="{{ 'Full Name' | translate }}"
+      />
+    </div>
+    <div class="md:col-4 col-12">
+      <input
+        pInputText
+        autocomplete="off"
+        formControlName="phone"
+        class="field"
+        placeholder="{{ 'Phone' | translate }}"
+      />
+    </div>
+    <div class="md:col-4 col-12">
+      <input
+        pInputText
+        autocomplete="off"
+        formControlName="floorNumber"
+        class="field"
+        placeholder="{{ 'Floor Number' | translate }}"
+      />
+    </div>
+    <div class="col-12">
+      <textarea
+        pInputTextarea
+        formControlName="address"
+        [rows]="2"
+        class="w-full"
+        placeholder="address"
+      ></textarea>
+    </div>
+  </div>
+
+  <div class="grid mb-2">
+    <div class="col-12 md:col-6">
+      <h3 class="mb-3">{{ "Order Items" | translate }}</h3>
+      <div class="info">
+        <ul class="m-0 list-none flex flex-column gap-3 list-product">
+          @for (item of orderItems(); track $index) {
+            <li class="flex gap-4">
+              <div class="flex-auto">
+                <div class="flex justify-content-between align-items-center">
+                  <span class="font-bold">
+                    {{ item.product.name }}
+                  </span>
+                  <span class="font-semibold text-sm text-700 ng-star-inserted">
+                    {{
+                      getOrderItemTotalPrice(item)
+                        | currency: " " : "symbol" : "0.0-0"
+                    }}
+                    <span>{{ "عراقي" | translate }}</span>
+                  </span>
+                </div>
+                <div class="flex align-items-center gap-3">
+                  <app-product-qty
+                    [product]="item.product"
+                    [orderItems]="orderItems()"
+                  >
+                  </app-product-qty>
+                </div>
+              </div>
+              <!--   
+              <div class="flex flex-column justify-content-between">
+                <app-product-delete-btn
+                  [productId]="item.product.id"
+                  [attributes]="item.attributes"
+                  (onUpdateDte)="deleteSuggestions(item.product)"
+                >
+                </app-product-delete-btn>
+              </div> -->
+            </li>
+          }
+        </ul>
+      </div>
+    </div>
+    <div class="col-12 md:col-6">
+      <h3 class="mb-3">{{ "Information Order" | translate }}</h3>
+      <div class="info">
+        <ul class="m-0 list-none flex flex-column gap-3">
+          <li class="flex justify-content-between align-items-center">
+            <span class="font-bold">{{ "Email" | translate }}</span>
+            <span> {{ email() }}</span>
+          </li>
+          <li class="flex justify-content-between">
+            <span class="font-bold"> {{ "Full Name" | translate }}</span>
+            <span>{{ firstName() + " " + lastName() }}</span>
+          </li>
+          <li class="flex justify-content-between">
+            <span class="font-bold"> {{ "Phone" | translate }}</span>
+            <span>{{ phone() }}</span>
+          </li>
+          <li class="flex justify-content-between align-items-center">
+            <span class="font-bold capitalize">{{
+              "Floor Number" | translate
+            }}</span>
+            <span>
+              {{ floorNumber() }}
+            </span>
+          </li>
+          <li class="flex justify-content-between align-items-center">
+            <span class="font-bold capitalize">{{
+              "total order" | translate
+            }}</span>
+            <span>
+              {{ totalOrder() }}
+            </span>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</form>

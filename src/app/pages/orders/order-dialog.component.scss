@@ -1,0 +1,30 @@
+.info {
+  ul {
+    padding: 15px;
+    border-radius: var(--border-radius);
+    background-color: var(--gray-100);
+    border: 1px solid var(--surface-400);
+    margin-bottom: 0px !important;
+  }
+}
+.field {
+  width: 100%;
+  height: var(--field-height);
+  font-size: 14px;
+  padding: 0.65rem 0.65rem;
+}
+
+.box-payment {
+  border-radius: var(--border-radius);
+  background-color: var(--gray-100);
+  border: 1px solid var(--surface-400);
+}
+
+.list-product {
+  max-height: 265px;
+  overflow-y: auto;
+}
+
+.img-contain {
+  object-fit: contain;
+}

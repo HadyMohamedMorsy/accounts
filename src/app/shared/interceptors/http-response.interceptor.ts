@@ -24,7 +24,7 @@ export const HttpResponseInterceptor: HttpInterceptorFn = (request, next) => {
     tap((response) => {
       if (response.body)
         alertService?.setMessage({
-          severity: response.body.status ? 'success' : 'warn',
+          severity: 'success',
           detail: response.body.message,
         });
     }),

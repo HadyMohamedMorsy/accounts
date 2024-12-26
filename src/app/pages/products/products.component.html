@@ -29,18 +29,19 @@
   <div moreActions>
     <ul class="list-none m-0 p-0 flex flex-wrap gap-3 align-items-center">
       <li>
-        <a
+        <button
           pButton
           class="text-sm px-3 py-2 p-button text-white"
-          [label]="'Orders' | translate"
           icon="pi pi-calendar-plus"
-          routerLink="/orders"
+          (click)="openOrderDialog()"
+          [disabled]="!count()"
         >
-        </a>
+          {{ "Add Orders" | translate }} ({{ count() }})
+        </button>
       </li>
     </ul>
 
-    <ng-template #extendDefaultActionsTemplate let-project>
+    <ng-template #extendDefaultActionsTemplate let-product>
       <button
         pButton
         pRipple
@@ -48,6 +49,7 @@
         [icon]="'pi pi-cart-plus text-xs'"
         tooltipPosition="top"
         class="p-button-rounded p-button-text p-button-sm"
+        (click)="addOrder(product)"
       ></button>
     </ng-template>
   </div>
