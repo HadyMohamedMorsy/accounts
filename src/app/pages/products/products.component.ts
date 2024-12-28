@@ -46,6 +46,7 @@ export default class ProductComponent extends BaseIndexComponent<
   currentLang = inject(LangService).currentLanguage;
   productCart = signal<orderItem[]>([]);
   count = computed(() => this.productCart().length);
+  formValue = signal({});
 
   ngOnInit() {
     this.dialogComponent = ProductDialogComponent;
@@ -102,42 +103,78 @@ export default class ProductComponent extends BaseIndexComponent<
 
   protected openOrderDialog() {
     const dialogConfigOptions = this.dialogConfig;
+    this.productCart.update((products) => {
+      return products.map((pro) => {
+        return {
+          product: { ...pro.product, store: pro.product.store - pro.quantity },
+          quantity: pro.quantity,
+        };
+      });
+    });
     this.dialogRef = this.dialogService.open(OrderDialogComponent, {
       ...dialogConfigOptions,
       data: this.productCart(),
     });
     this.dialogRef.onClose
       .pipe(takeUntilDestroyed(this.destroyRef))
-      .subscribe();
+      .subscribe((data) => {
+        if (!data) return;
+        this.productCart.set([]);
+      });
   }
 
   addOrder(product: Product) {
+    this.storeQty(product, 'minus');
+
     this.productCart.update((products) => {
       const existingProductIndex = products.findIndex(
         (item) => item.product.id === product.id,
       );
 
       if (existingProductIndex >= 0) {
-        this.alertService.setMessage({
-          severity: 'success',
-          detail: this.#translate(
-            _(
-              'This product has been added before. The number of this product has been increased',
-            ),
-          ),
-        });
+        this.message(
+          'This product has been added before. The number of this product has been increased',
+        );
         products[existingProductIndex].quantity += 1;
       } else {
-        this.alertService.setMessage({
-          severity: 'success',
-          detail: this.#translate(_('this product is added on cart item')),
-        });
+        this.message('this product is added on cart item');
         products = [{ product, quantity: 1 }, ...products];
       }
 
       return products;
     });
-    console.log(this.productCart());
+  }
+
+  removeOrder(product: Product) {
+    this.storeQty(product, 'plus');
+
+    this.productCart.update((products) => {
+      return products.filter((item) => item.product.id !== product.id);
+    });
+  }
+
+  isHidden(id: number) {
+    return !!this.productCart().find((pro) => pro.product.id === id);
+  }
+
+  storeQty(product: Product, type: 'plus' | 'minus') {
+    this.records.update((records) => {
+      return records.map((item) => {
+        if (item.id === product.id) {
+          const updatedStore =
+            type === 'plus' ? item.store + 1 : item.store - 1;
+          return { ...item, store: Math.max(0, updatedStore) };
+        }
+        return item;
+      });
+    });
+  }
+
+  message(message: string, status = 'success') {
+    this.alertService.setMessage({
+      severity: status,
+      detail: this.#translate(_(message)),
+    });
   }
 
   #translate(text: string) {

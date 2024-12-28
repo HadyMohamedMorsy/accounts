@@ -1,0 +1,36 @@
+<app-table-wrapper
+  [headerTitle]="indexMeta.indexTitle"
+  [titleIcon]="indexMeta.indexIcon"
+  [headerBtnLabel]="indexMeta.createBtnLabel"
+  [displayCreateButton]="indexMeta.displayCreateButton"
+  [columns]="indexMeta.columns"
+  [dataSource]="records()"
+  [loading]="isLoading()"
+  [totalRecords]="totalRecords()"
+  [recordsFiltered]="recordsFiltered()"
+  paginatorPosition="both"
+  [stateKey]="indexMeta.indexTableKey"
+  [indexRole]="roles().index"
+  [updateBtnRole]="roles().update"
+  [createBtnRole]="roles().create"
+  [deleteBtnRole]="roles().delete"
+  [globalFilterValue]="globalFilterValue"
+  [reorderableColumns]="indexMeta.reorderableColumns ?? false"
+  [reorderableRows]="indexMeta.reorderableRows ?? false"
+  [displayUpdateButton]="false"
+  (createBtnClicked)="openCreateRecordDialog()"
+  (updateBtnClicked)="openUpdateRecordDialog($event)"
+  (deleteBtnClicked)="deleteRecord($event)"
+  (onLoadData)="loadRecords($event)"
+>
+  <ng-template #status let-order>
+    <p-dropdown
+      [options]="statusTypes"
+      [(ngModel)]="order.status"
+      styleClass="py-1 pl-2 shadow-none"
+      appendTo="body"
+      [disabled]="order.status === 'deliveried' || order.status === 'returns'"
+      (onChange)="changeStatus(order.id, $event)"
+    />
+  </ng-template>
+</app-table-wrapper>

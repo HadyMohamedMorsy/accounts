@@ -42,15 +42,28 @@
     </ul>
 
     <ng-template #extendDefaultActionsTemplate let-product>
-      <button
-        pButton
-        pRipple
-        pTooltip="Add Cart Item"
-        [icon]="'pi pi-cart-plus text-xs'"
-        tooltipPosition="top"
-        class="p-button-rounded p-button-text p-button-sm"
-        (click)="addOrder(product)"
-      ></button>
+      @if (product.store) {
+        <button
+          pButton
+          pRipple
+          pTooltip="Add Cart Item"
+          icon="pi pi-cart-plus"
+          tooltipPosition="top"
+          class="p-button-rounded p-button-text p-button-sm"
+          (click)="addOrder(product)"
+        ></button>
+      }
+      @if (isHidden(product.id)) {
+        <button
+          pButton
+          pRipple
+          pTooltip="Minus Cart Item"
+          icon="pi pi-minus"
+          tooltipPosition="top"
+          class="p-button-rounded p-button-text p-button-danger p-button-sm"
+          (click)="removeOrder(product)"
+        ></button>
+      }
     </ng-template>
   </div>
 </app-table-wrapper>

@@ -21,9 +21,11 @@ export default class ReturnsComponent extends BaseIndexComponent<Returen> {
     this.indexMeta = {
       ...this.indexMeta,
       endpoints: {
-        index: 'return/index',
-        delete: 'return/delete',
+        index: 'returns/index',
+        delete: 'returns/delete',
       },
+      withAction: false,
+      displayCreateButton: false,
       indexTitle: this.translate.instant(_('returns')),
       indexIcon: 'fa-brands fa-product-hunt',
       indexTableKey: 'RETURN_KEY',
@@ -35,20 +37,8 @@ export default class ReturnsComponent extends BaseIndexComponent<Returen> {
           orderable: false,
         },
         {
-          name: `recipient_name`,
-          title: this.#translate(_('recipient name')),
-          searchable: true,
-          orderable: false,
-        },
-        {
-          name: `recipient_number`,
-          title: this.#translate(_('recipient number')),
-          searchable: true,
-          orderable: false,
-        },
-        {
-          name: `floor`,
-          title: this.#translate(_('floor')),
+          name: 'total_order',
+          title: this.#translate(_('total order')),
           searchable: false,
           orderable: false,
         },

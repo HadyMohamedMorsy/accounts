@@ -2,7 +2,8 @@ import {
   ChangeDetectionStrategy,
   Component,
   input,
-  signal,
+  model,
+  output,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { TranslateModule } from '@ngx-translate/core';
@@ -35,8 +36,9 @@ import { InputNumberModule } from 'primeng/inputnumber';
 export class ProductQtyComponent {
   product = input<any>({});
   orderItems = input<orderItem[]>([]);
-  quantity = signal<number>(0);
+  quantity = model<number>(0);
 
+  updateQty = output<number>();
   existingItem: orderItem | undefined;
 
   ngOnInit() {
@@ -48,5 +50,6 @@ export class ProductQtyComponent {
 
   updateOrder(quantity: number) {
     this.quantity.set(quantity);
+    this.updateQty.emit(this.quantity());
   }
 }

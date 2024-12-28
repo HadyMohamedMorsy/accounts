@@ -85,6 +85,12 @@ export class HeaderComponent {
   ngOnInit() {
     this.headerLinks = [
       {
+        label: this.#translate.instant(_('Customers')),
+        icon: 'fa-solid fa-user',
+        routerLink: '/customer',
+        routerLinkActiveOptions: { exact: true },
+      },
+      {
         label: this.#translate.instant(_('Products')),
         icon: 'fa-brands fa-product-hunt',
         routerLink: '/product',
@@ -93,7 +99,7 @@ export class HeaderComponent {
       {
         label: this.#translate.instant(_('Orders')),
         icon: 'fa-solid fa-building-un',
-        routerLink: '/order',
+        routerLink: '/orders',
         routerLinkActiveOptions: { exact: true },
       },
       {

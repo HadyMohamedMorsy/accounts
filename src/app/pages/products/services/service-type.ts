@@ -1,8 +1,10 @@
 export interface Product {
   id: number;
   name: string;
-  price: number;
-  sku: string;
+  code: string;
+  selling_price: number;
+  purchase_price: number;
+  store: number;
 }
 
 export class ProductModel {

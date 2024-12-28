@@ -28,3 +28,15 @@
 .img-contain {
   object-fit: contain;
 }
+
+.btn-padding {
+  padding: 5px 10px;
+}
+:host ::ng-deep {
+  .p-autocomplete-multiple-container {
+    padding: 0px;
+    padding-block: 0px;
+    padding-inline: 15px;
+    margin-bottom: 20px;
+  }
+}
