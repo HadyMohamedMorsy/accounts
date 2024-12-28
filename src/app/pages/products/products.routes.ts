@@ -7,7 +7,7 @@ export const productRoutes: Routes = [
     loadComponent: () => import('@pages/products/products.component'),
     title: _('product'),
     data: {
-      breadcrumbs: [{ label: _('product') }],
+      breadcrumbs: [{ label: _('Product') }],
     },
   },
 ];

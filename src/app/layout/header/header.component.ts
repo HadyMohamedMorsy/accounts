@@ -114,6 +114,12 @@ export class HeaderComponent {
         routerLink: '/returns',
         routerLinkActiveOptions: { exact: true },
       },
+      {
+        label: this.#translate.instant(_('Reports')),
+        icon: 'pi pi-chart-line',
+        routerLink: '/dashboard',
+        routerLinkActiveOptions: { exact: true },
+      },
     ];
   }
 

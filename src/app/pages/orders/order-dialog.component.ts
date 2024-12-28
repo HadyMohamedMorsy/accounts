@@ -125,7 +125,6 @@ export class OrderDialogComponent {
     });
 
     this.orderForm.setControl('order_items', this.#fb.array(this.orderItems()));
-    console.log(this.orderItems());
   }
 
   isStepValid(): boolean {
@@ -217,18 +216,13 @@ export class OrderDialogComponent {
 
       if (existingProductIndex >= 0) {
         this.message('This Product Is Selected Before', 'warn');
-        const productsSelected = this.getControl('products');
-        productsSelected?.setValue(
-          productsSelected.value.filter(
-            (item: any) =>
-              item.id !== productsSelected.value[existingProductIndex].id,
-          ),
-        );
         return products;
       } else {
         return [{ product, quantity: 1 }, ...products];
       }
     });
+    const productsSelected = this.getControl('products');
+    productsSelected?.setValue([]);
   }
 
   removeProduct(product: any) {

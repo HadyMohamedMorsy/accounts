@@ -48,6 +48,8 @@ export default class ProductComponent extends BaseIndexComponent<
   count = computed(() => this.productCart().length);
   formValue = signal({});
 
+  productMap: Map<number, any> = new Map();
+
   ngOnInit() {
     this.dialogComponent = ProductDialogComponent;
     this.indexMeta = {
@@ -124,7 +126,9 @@ export default class ProductComponent extends BaseIndexComponent<
   }
 
   addOrder(product: Product) {
-    this.storeQty(product, 'minus');
+    if (!this.productMap.has(product.id)) {
+      this.productMap.set(product.id, product);
+    }
 
     this.productCart.update((products) => {
       const existingProductIndex = products.findIndex(
@@ -143,14 +147,18 @@ export default class ProductComponent extends BaseIndexComponent<
 
       return products;
     });
+
+    this.storeQty(product, 'minus');
   }
 
   removeOrder(product: Product) {
     this.storeQty(product, 'plus');
-
-    this.productCart.update((products) => {
-      return products.filter((item) => item.product.id !== product.id);
-    });
+    const findRecord = this.records().find((item) => item.id === product.id);
+    if (this.productMap.get(product.id).store === findRecord?.store) {
+      this.productCart.update((products) => {
+        return products.filter((item) => item.product.id !== product.id);
+      });
+    }
   }
 
   isHidden(id: number) {
