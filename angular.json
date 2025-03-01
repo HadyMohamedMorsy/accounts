@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "mnHna-admin": {
+    "accounts": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -51,7 +51,7 @@
               "quill",
               "moment-timezone"
             ],
-            "outputPath": "dist/mnHna-admin",
+            "outputPath": "dist/account",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": ["zone.js"],
@@ -103,10 +103,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "mnHna-admin:build:production"
+              "buildTarget": "accounts:build:production"
             },
             "development": {
-              "buildTarget": "mnHna-admin:build:development"
+              "buildTarget": "accounts:build:development"
             }
           },
           "defaultConfiguration": "development"

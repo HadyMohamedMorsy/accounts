@@ -1,9 +1,9 @@
 import { Routes } from '@angular/router';
 import { marker as _ } from '@biesbjerg/ngx-translate-extract-marker';
-import { AuthGuard, LoginGuard } from './shared/guards';
+import { LoginGuard } from './shared/guards';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/auth/login', pathMatch: 'full' },
+  { path: '', redirectTo: '/product', pathMatch: 'full' },
   {
     path: 'auth',
     canActivate: [LoginGuard],
